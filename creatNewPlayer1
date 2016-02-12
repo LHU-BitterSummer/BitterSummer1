@@ -1,0 +1,48 @@
+using UnityEngine;
+using System.Collections;
+
+public class CreatNewPlayer : MonoBehaviour {
+
+    private BasePlayer newPlayer;
+    private bool isHeroClass;
+    
+
+    private string playerName = "Enter Name";
+
+	// Use this for initialization
+	void Start () {
+        newPlayer = new BasePlayer();
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
+
+    void OnGUI()
+    {
+        playerName = GUILayout.TextArea(playerName, 15);
+
+        isHeroClass = GUILayout.Toggle(isHeroClass, "Hero");
+
+        if(GUILayout.Button("Create"))
+        {
+            if(isHeroClass)
+            {
+                newPlayer.PlayerClass = new BaseHeroClass();
+            }
+            
+
+            newPlayer.PlayerLevel = 1;
+            newPlayer.Health = newPlayer.PlayerClass.Health;
+            newPlayer.Defense = newPlayer.PlayerClass.Defense;
+            newPlayer.Attack = newPlayer.PlayerClass.Attack;
+            newPlayer.Luck = newPlayer.PlayerClass.Luck;
+            newPlayer.PlayerName = playerName;
+
+            Debug.Log("Player Name: " + playerName);
+            Debug.Log("Player Class: " + newPlayer.PlayerClass.CharacterClassname);
+            Debug.Log("PLayer Level: " + newPlayer.PlayerLevel);
+        }
+    }
+}
